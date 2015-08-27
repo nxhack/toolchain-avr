@@ -33,7 +33,7 @@ cd objdir
 PREFIX=`pwd`
 cd -
 
-if [ `uname -s` == MINGW* ]
+if [[ `uname -s` == MINGW* ]]
 then
 	cd tmp/libusb-win32-bin*
 	LIBUSB_DIR=`pwd`
@@ -44,7 +44,7 @@ then
 	LDFLAGS="$LDFLAGS -I$LIBUSB_DIR/include -L$LIBUSB_DIR/lib/gcc"
 fi
 
-if [ `uname -s` == CYGWIN* ] || [ `uname -s` == "Linux" ] || [ `uname -s` == "Darwin" ]
+if [[ `uname -s` == CYGWIN* ]] || [ `uname -s` == "Linux" ] || [ `uname -s` == "Darwin" ]
 then
 	CFLAGS="$CFLAGS -I$PREFIX/include -I$PREFIX/include/libusb-1.0/ -L$PREFIX/lib"
 	CXXFLAGS="$CXXFLAGS -I$PREFIX/include -I$PREFIX/include/libusb-1.0/ -L$PREFIX/lib"
