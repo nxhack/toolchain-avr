@@ -5,7 +5,7 @@ cd objdir
 PREFIX=`pwd`
 cd -
 
-if [[ `uname -s` == CYGWIN* || `uname -s` == MINGW* ]]
+if [ `uname -s` == MINGW* ]
 then
 	if [[ ! -f libusb-win32-bin-1.2.6.0.zip  ]] ;
 	then
@@ -24,7 +24,7 @@ then
 	cp $LIBUSB_DIR/bin/x86/libusb0_x86.dll $PREFIX/bin/libusb0.dll
 fi
 
-if [ `uname -s` == "Linux" ] || [ `uname -s` == "Darwin" ]
+if [ `uname -s` == CYGWIN* ] || [ `uname -s` == "Linux" ] || [ `uname -s` == "Darwin" ]
 then
 	if [[ ! -f libusb-1.0.18.tar.bz2  ]] ;
 	then
@@ -32,6 +32,10 @@ then
 	fi
 
 	tar xfv libusb-1.0.18.tar.bz2
+
+	cd libusb-1.0.18
+	for p in ../libusb-patches/*.patch; do echo Applying $p; patch -p1 < $p; done
+	cd -
 
 	mkdir -p libusb-1.0-build
 	cd libusb-1.0-build
