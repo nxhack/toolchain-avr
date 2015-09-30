@@ -15,7 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-rm -rf toolsdir avr avrdude-6.0.1
+rm -rf toolsdir avr avrdude-6.1
 
 ./clean.bash
 ./tools.bash
@@ -43,5 +43,5 @@ mkdir objdir
 ./avrdude.build.bash
 ./clean.bash
 
-mv objdir avrdude-6.0.1
+mv objdir avrdude-6.1
 
