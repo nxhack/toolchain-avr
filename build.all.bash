@@ -33,9 +33,9 @@ rm -rf objdir*
 ./gdb.build.bash
 ./clean.bash
 
-mv objdir avr
+#mv objdir avr
 
-mkdir objdir
+#mkdir objdir
 
 ./clean.bash
 ./libusb.build.bash
@@ -43,5 +43,5 @@ mkdir objdir
 ./avrdude.build.bash
 ./clean.bash
 
-mv objdir avrdude-6.1
-
+#mv objdir avrdude-6.1
+mv objdir avr

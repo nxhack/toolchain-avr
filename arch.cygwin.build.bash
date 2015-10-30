@@ -19,6 +19,8 @@ CC="gcc -m32" CXX="g++ -m32" ./build.all.bash
 
 rm -f *arduino*.tar.bz2 *arduino*.zip
 
-zip -r -9 ./avr-gcc-4.9.2-arduino1-i686-pc-cygwin.zip avr/
+#zip -r -9 ./avr-gcc-4.9.2-arduino1-i686-pc-cygwin.zip avr/
 
-zip -r -9 ./avrdude-6.1-arduino1-i686-pc-cygwin.zip avrdude-6.1/
+#zip -r -9 ./avrdude-6.1-arduino1-i686-pc-cygwin.zip avrdude-6.1/
+
+zip -r -9 ./avr-toolchain-arduino-i686-pc-cygwin.zip avr/
