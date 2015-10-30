@@ -1,0 +1,12 @@
+diff -urN libusb-1.0.18.orig/libusb/os/windows_usb.h libusb-1.0.18/libusb/os/windows_usb.h
+--- libusb-1.0.18.orig/libusb/os/windows_usb.h	     2014-01-09 08:55:51.000000000 +0900
++++ libusb-1.0.18/libusb/os/windows_usb.h	     2015-08-27 12:55:34.000000000 +0900
+@@ -46,7 +46,7 @@
+ #endif
+ 
+ #if defined(__CYGWIN__ )
+-#define _stricmp stricmp
++#define _stricmp strcasecmp
+ // cygwin produces a warning unless these prototypes are defined
+ extern int _snprintf(char *buffer, size_t count, const char *format, ...);
+ extern char *_strdup(const char *strSource);

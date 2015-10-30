@@ -44,7 +44,7 @@ cd objdir
 PREFIX=`pwd`
 cd -
 
-if [[ `uname -s` == CYGWIN* || `uname -s` == MINGW* ]]
+if [[ `uname -s` == CYGWIN* ]]
 then
 	cd tmp/libusb-win32-bin*
 	LIBUSB_DIR=`pwd`
@@ -79,7 +79,7 @@ CHECKLIBUSB=`grep "DON'T HAVE libusb" avrdude.configure.output || echo`
 CHECKLIBUSB1=`grep "DON'T HAVE libusb_1_0" avrdude.configure.output || echo`
 rm avrdude.configure.output
 
-if [[ `uname -s` == CYGWIN* || `uname -s` == MINGW* ]]; then
+if [[ `uname -s` == CYGWIN* ]]; then
 	if [[ "$CHECKLIBUSB" == "$DOESNTHAVELIBUSB" && "$CHECKLIBUSB1" == "$DOESNTHAVELIBUSB1" ]]; then
 		echo "avrdude missing libusb support"
 		exit 1
