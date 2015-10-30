@@ -48,6 +48,10 @@ then
 
 	tar xfv libusb-1.0.20.tar.bz2
 
+    cd libusb-1.0.20
+    for p in ../libusb-patches/*.patch; do echo Applying $p; patch -p1 < $p; done
+    cd -
+
 	mkdir -p libusb-1.0-build
 	cd libusb-1.0-build
 
@@ -71,10 +75,6 @@ then
 	fi
 
 	tar xfv libusb-compat-0.1.5.tar.bz2
-
-    cd libusb-1.0.18
-    for p in ../libusb-patches/*.patch; do echo Applying $p; patch -p1 < $p; done
-    cd -
 
 	mkdir -p libusb-0.1-build
 	cd libusb-0.1-build

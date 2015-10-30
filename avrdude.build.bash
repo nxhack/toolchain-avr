@@ -44,7 +44,7 @@ cd objdir
 PREFIX=`pwd`
 cd -
 
-if [[ `uname -s` == CYGWIN* ]]
+if [[ `uname -s` == MINGW* ]]
 then
 	cd tmp/libusb-win32-bin*
 	LIBUSB_DIR=`pwd`
@@ -55,7 +55,7 @@ then
 	LDFLAGS="$LDFLAGS -I$LIBUSB_DIR/include -L$LIBUSB_DIR/lib/gcc"
 fi
 
-if [ `uname -s` == "Linux" ] || [ `uname -s` == "Darwin" ]
+if [[ `uname -s` == CYGWIN* ]] || [ `uname -s` == "Linux" ] || [ `uname -s` == "Darwin" ]
 then
 	CFLAGS="$CFLAGS -DHAVE_STDINT_H -I$PREFIX/include -I$PREFIX/include/libusb-1.0/ -L$PREFIX/lib"
 	CXXFLAGS="$CXXFLAGS -DHAVE_STDINT_H -I$PREFIX/include -I$PREFIX/include/libusb-1.0/ -L$PREFIX/lib"
@@ -73,19 +73,17 @@ CONFARGS=" \
 CFLAGS="-w -O2 $CFLAGS" CXXFLAGS="-w -O2 $CXXFLAGS" LDFLAGS="-s $LDFLAGS" ../avrdude-6.1/configure $CONFARGS > avrdude.configure.output
 
 cat avrdude.configure.output
-DOESNTHAVELIBUSB="DON'T HAVE libusb"
-DOESNTHAVELIBUSB1="DON'T HAVE libusb_1_0"
-CHECKLIBUSB=`grep "DON'T HAVE libusb" avrdude.configure.output || echo`
-CHECKLIBUSB1=`grep "DON'T HAVE libusb_1_0" avrdude.configure.output || echo`
+CHECKLIBUSB=`fgrep "DON'T HAVE libusb" avrdude.configure.output || echo`
+CHECKLIBUSB1=`fgrep "DON'T HAVE libusb_1_0" avrdude.configure.output || echo`
 rm avrdude.configure.output
 
-if [[ `uname -s` == CYGWIN* ]]; then
-	if [[ "$CHECKLIBUSB" == "$DOESNTHAVELIBUSB" && "$CHECKLIBUSB1" == "$DOESNTHAVELIBUSB1" ]]; then
+if [[ `uname -s` == CYGWIN* || `uname -s` == MINGW* ]]; then
+	if [[ ! -z "$CHECKLIBUSB" && ! -z "$CHECKLIBUSB1" ]]; then
 		echo "avrdude missing libusb support"
 		exit 1
 	fi
 else
-	if [[ "$CHECKLIBUSB" == "$DOESNTHAVELIBUSB" || "$CHECKLIBUSB1" == "$DOESNTHAVELIBUSB1" ]]; then
+	if [[ ! -z "$CHECKLIBUSB" || ! -z "$CHECKLIBUSB1" ]]; then
 		echo "avrdude missing libusb support"
 		exit 1
 	fi
